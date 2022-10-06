@@ -1,6 +1,15 @@
 import random
 
 
+def inputIntDigit(message):
+    while True:
+        try:
+            n = int(input(message))
+            return n
+        except ValueError:
+            print("Вы ввели не число. Попробуйте снова: ")
+
+
 def fillListRandom(aList, number, start_num, finish_num):
     aList = []
     for _ in range(number):
