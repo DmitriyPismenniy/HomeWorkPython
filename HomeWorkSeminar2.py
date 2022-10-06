@@ -16,6 +16,17 @@ def task14():
             my_sum += int(num[i])
     print('Сумма цифр вещественного числа = ', my_sum)
 
+
+#From seminar
+n = float(input('Введите вещественное число: '))
+sum = 0 
+while not n.is_integer(): 
+        n = n*10 
+while n != 0: 
+    sum += n % 10 
+    n //= 10
+print(sum)
+
 # From seminar
 # n = input("Введите число = ").replace('.', '').replace('-', '')
 # while not n.isdigit():
