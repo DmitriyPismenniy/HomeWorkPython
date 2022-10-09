@@ -125,3 +125,49 @@ task2()
 task3()
 task4()
 task5()
+
+
+# # [-21 ,13, -8, 5, −3, 2, −1, 1, 0, 1, 1, 2, 3, 5, 8, 13, 21] 
+# num = 8
+# my_list = [1, 0, 1]
+# for _ in range(1, num):
+#     print(my_list[0], my_list[1] - my_list[0] )
+#     print(my_list[-1], my_list[-2] + my_list[-1])
+#     my_list.append(my_list[-2] + my_list[-1])
+#     my_list.insert(0, my_list[1] - my_list[0])
+
+# def pow(n, mult):
+#     """
+#     Возвращает x в степени n. Предполагает, что I – это единичная матрица, которая 
+#     перемножается с mult, а n – положительное целое
+#     """
+#     I = [[1, 0], [0, 1]]
+#     x = [[1, 1], [1, 0]]
+#     if n == 0:
+#         print('Возвращается I, равна:', I)
+#         return I
+#     elif n == 1:
+#         print('Возвращается Х, равен:', x)
+#         return x
+#     else:
+#         print('n // 2, mult:', n // 2, I, mult)
+#         y = pow(n // 2, mult)
+#         print('y = mult(y, y), y =', y)
+#         y = mult(y, y)
+#         if n % 2:
+#             print('y = mult(x, y), x, y =', x, y)
+#             y = mult(x, y)
+#         print('Возвращается y =', y)
+#         return y
+
+# def matrix_multiply(A, B):
+#     BT = list(zip(*B))
+#     print('BT', BT)
+#     res= [[sum(a * b
+#                  for a, b in zip(row_a, col_b))
+#             for col_b in BT]
+#             for row_a in A]
+#     print('matrix_multiply=',res)
+#     return res
+
+# print(pow(8, matrix_multiply)[0][1])
