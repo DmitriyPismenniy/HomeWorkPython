@@ -11,22 +11,10 @@ from my_functions import *
 # Пример: при d = 0.001, π = 3.141.    10^{-1} ≤ d ≤10^{-10}
 def task1():
     num = float(input('Задача 1. Введите вещественное число: '))
-    d = float(
-        input('Введите требуемую точность в формате 10^{-1} ≤ d ≤10^{-10}: '))
-    accuracy = 0
+    d = input('Введите требуемую точность в формате 10^{-1} ≤ d ≤10^{-10}: ')
 
-    while d < 1:  # Расчет смещения для требуемой точности
-        d *= 10
-        accuracy += 1
-
-    f = math.floor(num)  # Расчет смещения для целой части числа
-    while f > 1:
-        f /= 10
-        accuracy += 1
-
-    getcontext().prec = accuracy
-    print(f'{Decimal(num)/Decimal(1)}')
-
+    result = Decimal(num).quantize(Decimal(d))
+    print(result)
 
 # From Seminar
 # number = float(input())
