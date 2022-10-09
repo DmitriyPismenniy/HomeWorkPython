@@ -1,6 +1,9 @@
+from cgitb import strong
 from decimal import *
 import math
 from random import randint
+from symbol import power
+from typing import Iterable
 from my_functions import *
 
 
@@ -128,105 +131,103 @@ def task4():
 
 
 
-task1()
-task2()
-task3()
-task4()
+from collections import Counter
+
+
+def power_polinom(x):
+    powIn_list = list(x.split())
+    powOut_list = []
+    for i in powIn_list:
+        if '*x^' in i:
+            f = i[i.find('^') + 1:]
+            powOut_list.append(int(f))
+        elif '*x' in i:
+            powOut_list.append(1)
+        elif i.isdigit() and int(i) != 0:
+            powOut_list.append(0)
+    return powOut_list
+
+
+def koef_polinom(x):
+    koefIn_list = list(x.split())
+    koefOut_list = []
+    for i in koefIn_list:
+        if '*x' in i:
+            f = i[:i.find('*')]
+            koefOut_list.append(int(f))
+        elif i.isdigit() and int(i) != 0:
+           koefOut_list.append(int(i))
+    return koefOut_list
+
+
+def task5():
+    strIn1 = ''
+    strIn2 = ''
+    strOut = ''
+
+    data = open('./PythonHomeWork/Sem4PolinomIn1.txt', 'r')
+    strIn1 = str(data.readline())
+    data.close
+
+    data = open('./PythonHomeWork/Sem4PolinomIn2.txt', 'r')
+    strIn2 = str(data.readline())
+    data.close
+
+    # print('strIn1 = ', strIn1)
+    # print('strIn2 = ', strIn2)
+
+    pow_list1 = power_polinom(strIn1)
+    pow_list2 = power_polinom(strIn2)
+    koef_list1 = koef_polinom(strIn1)
+    koef_list2 = koef_polinom(strIn2)
+
+    # print(str1)
+    # print('pow_list1  = ', pow_list1)
+    # print('koef_list1 = ', koef_list1)
+    # print(str2)
+    # print('pow_list2  = ', pow_list2)
+    # print('koef_list2 = ', koef_list2)
+
+    polinomIn_dict1 = dict(zip(pow_list1, koef_list1))
+    polinomIn_dict2 = dict(zip(pow_list2, koef_list2))
+
+    a = Counter(polinomIn_dict1)
+    b = Counter(polinomIn_dict2)
+    polinomOut_dict = dict(reversed(sorted((a + b).items())))
+
+    # print('polinomIn_dict1', polinomIn_dict1)
+    # print('polinomIn_dict2', polinomIn_dict2)
+    # print('polinomOut_dict преобраз', polinomOut_dict)
+
+    powOut_list = list(polinomOut_dict.keys())
+    koefOut_list = list(polinomOut_dict.values())
+
+    # print('powOut_list  ', powOut_list)
+    # print('koefOut_list ', koefOut_list)
+
+    for i in range(len(polinomOut_dict)):
+        k = koefOut_list[i]
+        p = powOut_list[i]
+        if p > 1:
+            strOut += f'{k}*x^{p} +'
+        elif p == 1:
+            strOut += f'{k}*x'
+        elif p == 0:
+            strOut += f'+ {k}'
+    strOut += '= 0'
+
+    # print('strOut = ', strOut)
+
+    with open('./PythonHomeWork/Sem4PolinomOut.txt', 'w') as data:
+        data.write(strOut)
+    data.close
 
 
 
 
 
-
-
-
-# Задача 5. Даны два файла, в каждом из которых находится запись многочлена. Задача -
-# сформировать файл, содержащий сумму многочленов.
-
-
-# a = (str1_koef, str2_koef)
-
-#     resultdict = {}
-
-#     for dictionary in a:
-#         for key in dictionary:
-#             try:
-#                 resultdict[key] += dictionary[key]
-#             except KeyError:
-#                 resultdict[key] = dictionary[key]
-
-#     resultdict = dict(sorted(resultdict.items(), reverse=True))
-
-
-# Даны два файла, в каждом из которых находится запись многочлена. Задача - сформировать файл, содержащий сумму многочленов
-# f_1 = open('polynominal_1.txt','r')
-# f_2 = open('polynominal_2.txt','r')
-# x_1 = str(f_1.readline())
-# x_2 = str(f_2.readline())
-# def Power(x):
-#     pow = []
-#     for i in range(1, len(x)):
-#         if x[i - 1] == '^':
-#             pow.append(int(x[i]))
-#     return pow
-# def Koefficient(x, p):
-#     koeff = str(x).replace(' = 0', '')
-#     for i in range(p[0], 0, -1):
-#         koeff = koeff.replace(f' * x^{i} + ', ' ')
-#     koeff = [float(i) for i in koeff.split()]
-#     return koeff
-# pow_1 = Power(x_1)
-# pow_2 = Power(x_2)
-# koeff_1 = Koefficient(x_1, pow_1)
-# koeff_2 = Koefficient(x_2, pow_2)
-# pow_1.insert(len(pow_1), 0)
-# pow_2.insert(len(pow_2), 0)
-# p_matrix = [pow_1[0], pow_2[0]]
-# polynominal_1 = {}
-# for i in range(0, len(pow_1)):
-#         polynominal_1[pow_1[i]] = koeff_1[i]
-# polynominal_2 = {}
-# for i in range(0, len(pow_2)):
-#     polynominal_2[pow_2[i]] = koeff_2[i]
-# polynominal_sum = {}
-# for i in range(max(p_matrix), -1, -1):
-#     if i in pow_1 and i not in pow_2:
-#         polynominal_sum[i] = polynominal_1[i]
-#     elif i not in pow_1 and i in pow_2:
-#         polynominal_sum[i] = polynominal_2[i]
-#     elif i in pow_1 and i in pow_2:
-#         polynominal_sum[i] = polynominal_1[i] + polynominal_2[i]
-# final = open('polynominal_sum.txt','w')
-# for k, v in polynominal_sum.items():
-#     if k != 0:
-#         final.write(f'{v} * x^{k} + ')
-#     else:
-#         final.write(f'{v} = 0')
-# f_1.close()
-# f_2.close()
-# final.close()
-
-# https://github.com/KarinaKazamanova/Python
-
-# >>> from collections import Counter
-# >>> a = Counter({'menu': 20, 'good': 15, 'happy': 10, 'bar': 5})
-# >>> b = Counter({'menu': 1, 'good': 1, 'bar': 3})
-# >>> a + b
-# Counter({'menu': 21, 'good': 16, 'happy': 10, 'bar': 8})
-
-
-# https://pythonru.com/biblioteki/sympy-v-python
-# x = Symbol('x')
-# y = Symbol('y')
-# # x = -1.038
-# # y = 3**0.5
-# t = (2*x + 3*y)**2 - 3*x*(4/3*x+4*y)
-# simplify(t)
-# f = 4*x**4-65*x**2+16
-# solve(f)
-# print(f)
-
-
-
-
-
+# task1()
+# task2()
+# task3()
+# task4()
+task5()
