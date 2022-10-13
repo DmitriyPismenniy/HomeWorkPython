@@ -26,6 +26,7 @@ def task1():
 #     a) Добавьте игру против бота - сделано сразу b)
 #     b) Подумайте как наделить бота "интеллектом"
 
+
 def input_check(n, message):
     while True:
         try:
@@ -142,7 +143,8 @@ def task2():
 
 # 3. Создайте программу для игры в "Крестики-нолики".
 
-def print_game(game_dict_prt):
+def print_game(req_ch, game_dict_prt):
+    req_ch = 0
     a1, b1, c1 = game_dict_prt['a1'], game_dict_prt['b1'], game_dict_prt['c1']
     a2, b2, c2 = game_dict_prt['a2'], game_dict_prt['b2'], game_dict_prt['c2']
     a3, b3, c3 = game_dict_prt['a3'], game_dict_prt['b3'], game_dict_prt['c3']
@@ -153,6 +155,12 @@ def print_game(game_dict_prt):
     print(f'2    {a2}\t|   {b2}\t|  {c2}')
     print(f'   -----+-------+-----')
     print(f'3    {a3}\t|   {b3}\t|  {c3}')
+
+    if (a1 == a2 == a3 != '' or b1 == b2 == b3 != '' or c1 == c2 == c3 != ''
+        or a1 == b1 == c1 != '' or a2 == b2 == c2 != '' or a3 == b3 == c3 != ''
+            or a1 == b2 == c3 != '' or a3 == b2 == c1 != ''):
+        req_ch = 1
+        return req_ch
 
 
 def ind_check(index_ch, dict_ch, message_ch):
@@ -174,39 +182,27 @@ def ind_check(index_ch, dict_ch, message_ch):
         exit()
 
 
-def win_check(req_ch, win_dict):
-    req_ch = 0
-    a1, b1, c1 = win_dict['a1'], win_dict['b1'], win_dict['c1']
-    a2, b2, c2 = win_dict['a2'], win_dict['b2'], win_dict['c2']
-    a3, b3, c3 = win_dict['a3'], win_dict['b3'], win_dict['c3']
-    if (a1 == a2 == a3 != '' or b1 == b2 == b3 != '' or c1 == c2 == c3 != ''
-        or a1 == b1 == c1 != '' or a2 == b2 == c2 != '' or a3 == b3 == c3 != ''
-            or a1 == b2 == c3 != '' or a3 == b2 == c1 != ''):
-        req_ch = 1
-        return req_ch
-
-
 def task3():
+    req = 0
     game_dict = \
         {'a1': '', 'b1': '', 'c1': '', 'a2': '', 'b2': '', 'c2': '',
             'a3': '', 'b3': '', 'c3': ''}
-    print_game(game_dict)
-    req = 0
+    print_game(req, game_dict)
 
     while True:
         ind_dict = ind_check(
             req, game_dict, 'Игрок 1 сделайте свой ход (x) в формате от a1 до с3: ')
         game_dict[ind_dict] = 'x'
-        print_game(game_dict)
-        if win_check(req, game_dict) == 1:
+        print_game(req, game_dict)
+        if print_game(req, game_dict) == 1:
             print('Игрок 1, вы выиграли, поздравляем!')
             exit()
 
         ind_dict = ind_check(
             req, game_dict, 'Игрок 2 сделайте свой ход (o) в формате от a1 до с3: ')
         game_dict[ind_dict] = 'o'
-        print_game(game_dict)
-        if win_check(req, game_dict) == 1:
+        print_game(req, game_dict)
+        if print_game(req, game_dict) == 1:
             print('Игрок 2, вы выиграли, поздравляем!')
             exit()
 
@@ -275,5 +271,5 @@ def task4():
 
 # task1()
 # task2()
-# task3()
-task4()
+task3()
+# task4()
