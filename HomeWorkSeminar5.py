@@ -26,7 +26,6 @@ def task1():
 #     a) Добавьте игру против бота - сделано сразу b)
 #     b) Подумайте как наделить бота "интеллектом"
 
-
 def input_check(n, message):
     while True:
         try:
@@ -148,7 +147,7 @@ def print_game(req_ch, game_dict_prt):
     a1, b1, c1 = game_dict_prt['a1'], game_dict_prt['b1'], game_dict_prt['c1']
     a2, b2, c2 = game_dict_prt['a2'], game_dict_prt['b2'], game_dict_prt['c2']
     a3, b3, c3 = game_dict_prt['a3'], game_dict_prt['b3'], game_dict_prt['c3']
-
+  
     print(f'     a      b      c')
     print(f'1    {a1}\t|   {b1}\t|  {c1}')
     print(f'   -----+-------+-----')
@@ -188,7 +187,7 @@ def task3():
         {'a1': '', 'b1': '', 'c1': '', 'a2': '', 'b2': '', 'c2': '',
             'a3': '', 'b3': '', 'c3': ''}
     print_game(req, game_dict)
-
+    
     while True:
         ind_dict = ind_check(
             req, game_dict, 'Игрок 1 сделайте свой ход (x) в формате от a1 до с3: ')
