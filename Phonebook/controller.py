@@ -11,7 +11,6 @@ num_del = ''
 def click_button():
     print('\nДобро пожаловать в телефонный справочник!')
     sd.init_dict(phone_dict)   # Восстановление справочника из файла
-    # exit()
     num_ch1 = ur.input_choice1()
     while num_ch1 != 0:
         if num_ch1 == 1:  # Вывод справочника
@@ -40,7 +39,6 @@ def click_button():
             num_ch1 = ur.input_choice1()
         else:  # Экспорт справочника
             print('Экспортировать')  # Ещё не готово
-            num_ch1 = ur.input_choice1()           
-    sd.save_phone(phone_dict)        
+            num_ch1 = ur.input_choice1()
     print('\nСпасибо за использование телефонного справочника\n \
         До новых встреч!')
