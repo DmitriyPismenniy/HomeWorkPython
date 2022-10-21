@@ -14,8 +14,7 @@ def input_entry(aDict):
     return aDict
 
 
-def del_entry(aDict : dict, num_id: int):
-    print(aDict)  # Если комментирую, то перестаёт находить индекс??(((
+def del_entry(aDict: dict, num_id: int):
     num_id = int(input('Для удаления введите id записи: '))
     while True:
         try:
